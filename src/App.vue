@@ -1,13 +1,14 @@
 <template>
-  <div id="app">
+<div class="outer"> 
+  <div  class="s" style="font-family: 'Lacquer', sans-serif; ">{{info.data.contents.quotes[0].quote}}</div>
+</div>
 
-  <input v-model="name">  
-  
-  </div>
+
 </template>
 
 <script>
 
+import axios from 'axios';
 export default {
   name: 'app',
   components: {
@@ -15,32 +16,42 @@ export default {
   },
   data(){
     return{
-      decider:true,
-      scpt:"<h1>this is a heading!</h1>",
-     d : new Date(),
-     info:'',
-     loading: true,
-     errored: false,
-     name:''
+    info: "inbd",
+      
     }
   },
- mounted() {
-   if(localStorage.name){
-     this.name = localStorage.name;
-   }
- },
- watch:{
-   name(newName){
-     localStorage.name = newName;
-   }
- }
+ 
+mounted () {
+    axios
+      .get( 'http://quotes.rest/qod.json?category=inspire ')
+      .then(response => (this.info = response))
+  },
+
 
 }
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Lacquer&display=swap');
 .one{
   color:red;
   
+}
+.s{
+  font-size: 60px;
+  text-align: center;
+  width:80%;
+  height:80%;
+
+  margin: auto;
+  margin-top:10%;
+  
+ 
+}
+.outer{
+background-color: #F7CA18;
+width:100%;
+height:100%;
+margin:0;
 }
 </style>
